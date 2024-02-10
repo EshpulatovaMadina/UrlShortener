@@ -2,7 +2,6 @@ package com.example.shortener.config;
 
 import com.example.shortener.exceptions.DataAlreadyExistsException;
 import com.example.shortener.exceptions.DataNotFoundException;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -5,17 +5,11 @@ import com.example.shortener.DTO.response.ShortenResponse;
 import com.example.shortener.entity.Visits;
 import com.example.shortener.service.UrlService;
 
-import com.sun.net.httpserver.Headers;
 import jakarta.servlet.ServletRequest;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.net.http.HttpClient;
 import java.util.List;
 
 @RestController
