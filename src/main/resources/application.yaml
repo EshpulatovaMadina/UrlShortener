@@ -3,6 +3,7 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/url
       database: url
+      auto-index-creation: true
 
 springdoc:
   api-docs:

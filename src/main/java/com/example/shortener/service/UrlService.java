@@ -11,5 +11,5 @@ public interface UrlService {
 
     List<Visits> getInfo(String shortUrl, String code);
 
-    String redirect(String shortUrl);
+    String redirect(String shortUrl, String ipAddress);
 }
