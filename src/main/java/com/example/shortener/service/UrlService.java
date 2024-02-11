@@ -7,6 +7,7 @@ import com.example.shortener.entity.Visits;
 import java.util.List;
 
 public interface UrlService {
+
     ShortenResponse shorten(UrlShortenDto urlShorten);
 
     List<Visits> getInfo(String shortUrl, String code);

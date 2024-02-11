@@ -4,6 +4,7 @@ import com.example.shortener.DTO.request.UrlShortenDto;
 import com.example.shortener.DTO.response.ShortenResponse;
 import com.example.shortener.entity.UrlEntity;
 import com.example.shortener.entity.Visits;
+import com.example.shortener.exceptions.BadRequestException;
 import com.example.shortener.exceptions.DataAlreadyExistsException;
 import com.example.shortener.exceptions.DataNotFoundException;
 import com.example.shortener.repository.UrlRepository;
@@ -20,11 +21,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UrlServiceImpl implements UrlService {
     private final UrlRepository urlRepository;
+
     @Override
     public ShortenResponse shorten(UrlShortenDto urlShorten) {
         Optional<UrlEntity> optional = urlRepository.findByShortUrl(urlShorten.getShortUrl());
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             throw new DataAlreadyExistsException("Url already exists");
+        }
+        String rgx = "^[a-zA-Z0-9]+$";
+
+        if(!urlShorten.getShortUrl().matches(rgx)) {
+            throw new BadRequestException("Short url must contain only alpha numeric characters and numbers");
         }
         String generatedString = RandomStringUtils.randomAlphanumeric(8);
         UrlEntity urlEntity = new UrlEntity();
@@ -33,7 +40,7 @@ public class UrlServiceImpl implements UrlService {
         urlEntity.setCode(generatedString);
         urlEntity.setVisits(new ArrayList<>());
         UrlEntity entity = urlRepository.save(urlEntity);
-        return new ShortenResponse(entity.getUrl(),entity.getShortUrl(),entity.getCode());
+        return new ShortenResponse(entity.getUrl(), entity.getShortUrl(), entity.getCode());
     }
 
     @Override

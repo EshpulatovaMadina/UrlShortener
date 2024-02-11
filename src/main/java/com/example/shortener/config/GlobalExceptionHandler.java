@@ -1,5 +1,6 @@
 package com.example.shortener.config;
 
+import com.example.shortener.exceptions.BadRequestException;
 import com.example.shortener.exceptions.DataAlreadyExistsException;
 import com.example.shortener.exceptions.DataNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -15,5 +16,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = DataAlreadyExistsException.class)
     public ResponseEntity<String> dataAlreadyExists(DataAlreadyExistsException e) {
         return ResponseEntity.status(409).body(e.getMessage());
+    }
+    @ExceptionHandler(value = BadRequestException.class )
+    public ResponseEntity<String> badRequest(BadRequestException e) {
+        return ResponseEntity.status(400).body(e.getMessage());
     }
 }
