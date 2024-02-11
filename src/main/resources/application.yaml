@@ -1,3 +1,4 @@
+
 spring:
   data:
     mongodb:
@@ -16,3 +17,5 @@ springdoc:
     operations-sorter: alpha
     disable-swagger-default-url: true
     doc-expansion: none
+server:
+  port: 4245
