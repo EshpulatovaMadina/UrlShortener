@@ -1,5 +1,6 @@
 package com.example.shortener.service;
 
+import com.example.shortener.DTO.request.DeleteRequestDto;
 import com.example.shortener.DTO.request.UrlShortenDto;
 import com.example.shortener.DTO.response.ShortenResponse;
 import com.example.shortener.entity.Visits;
@@ -13,4 +14,8 @@ public interface UrlService {
     List<Visits> getInfo(String shortUrl, String code);
 
     String redirect(String shortUrl, String ipAddress);
+
+    ShortenResponse edit(ShortenResponse shortenResponse);
+
+    String delete(DeleteRequestDto deleteRequestDto);
 }

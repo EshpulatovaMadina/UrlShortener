@@ -1,5 +1,6 @@
 package com.example.shortener.service;
 
+import com.example.shortener.DTO.request.DeleteRequestDto;
 import com.example.shortener.DTO.request.UrlShortenDto;
 import com.example.shortener.DTO.response.ShortenResponse;
 import com.example.shortener.entity.UrlEntity;
@@ -60,5 +61,22 @@ public class UrlServiceImpl implements UrlService {
         urlEntity.setVisits(visits);
         urlRepository.save(urlEntity);
         return urlEntity.getUrl();
+    }
+
+    @Override
+    public ShortenResponse edit(ShortenResponse shortenResponse) {
+        UrlEntity urlEntity = urlRepository.findByShortUrlAndCode(shortenResponse.getShortUrl(), shortenResponse.getCode())
+                .orElseThrow(() -> new DataNotFoundException("Url not found"));
+        urlEntity.setUrl(shortenResponse.getUrl());
+        UrlEntity entity = urlRepository.save(urlEntity);
+        return new ShortenResponse(entity.getUrl(), entity.getShortUrl(), entity.getCode());
+    }
+
+    @Override
+    public String delete(DeleteRequestDto deleteRequestDto) {
+        UrlEntity urlEntity = urlRepository.findByShortUrlAndCode(deleteRequestDto.getShortUrl(), deleteRequestDto.getCode())
+                .orElseThrow(() -> new DataNotFoundException("Url not found"));
+        urlRepository.delete(urlEntity);
+        return "Url deleted";
     }
 }
